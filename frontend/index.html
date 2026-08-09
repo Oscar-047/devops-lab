@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Lab - Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>DevOps Lab</h1>
+    <p>Click the button to fetch a message from the backend.</p>
+    <button id="fetchBtn">Fetch Message</button>
+    <a href="stories.html">View All Stories</a>
+    <div id="message">Waiting...</div>
+
+    <script>
+        document.getElementById('fetchBtn').addEventListener('click', async () => {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = 'Loading...';
+            try {
+                const response = await fetch('http://localhost:3000/api/hello');
+                const data = await response.json();
+                messageDiv.textContent = data.message;
+            } catch (error) {
+                messageDiv.textContent = 'Error: Could not reach backend.';
+            }
+        });
+    </script>
+</body>
+</html>
