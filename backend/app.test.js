@@ -13,7 +13,7 @@ describe('GET /api/stories', () => {
     it('should return a list of stories', async () => {
         const res = await request(app).get('/api/stories');
         expect(res.statusCode).toBe(200);
-        expect(res.body.length).toBe(2);
+        expect(res.body.length).toBe(3);
         expect(res.body[0]).toHaveProperty('title');
         expect(res.body[0]).toHaveProperty('content');
     });
