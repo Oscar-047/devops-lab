@@ -3,6 +3,8 @@ name: CI
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
@@ -17,12 +19,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: |
           cd backend
           npm install
 
-      - name: Run a simple test
+      - name: Run backend tests
         run: |
           cd backend
-          node -e "console.log('✅ Backend is working!')"
+          npm test
+
+      - name: Build Docker image
+        run: |
+          cd backend
+          docker build -t devops-backend .
